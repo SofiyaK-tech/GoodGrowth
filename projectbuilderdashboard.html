@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Builder Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+        }
+
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            background: #333;
+            position: fixed;
+            left: -250px; /* Hide sidebar by default */
+            top: 0;
+            padding: 20px;
+            color: #fff;
+            transition: left 0.3s ease;
+            z-index: 2; 
+        }
+
+        .sidebar.show {
+            left: 0; /* Show sidebar when the class is added */
+        }
+
+        .sidebar-brand {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+
+        .sidebar-brand h2 {
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .sidebar-menu ul {
+            list-style: none;
+        }
+
+        .sidebar-menu ul li {
+            margin-bottom: 20px;
+        }
+
+        .sidebar-menu ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+        }
+
+        .sidebar-menu ul li a:hover {
+            background: #575757;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .main-content {
+            margin-left: 0;
+            width: 100%;
+            padding: 20px;
+            background: #f4f4f4;
+            min-height: 100vh;
+            transition: margin-left 0.3s ease;
+            
+        }
+
+        .main-content.shift {
+            margin-left: 250px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .user-wrapper {
+            display: flex;
+            align-items: center;
+        }
+
+        .user-wrapper img {
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .dashboard-cards {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 30px;
+        }
+
+        .card {
+            background: #fff;
+            padding: 20px;
+            width: 30%;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: center;
+            border-radius: 8px;
+        }
+
+        .card h3 {
+            margin-bottom: 10px;
+        }
+
+        .card-link {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .card-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Form Styles */
+        .form-container {
+            display: none;
+        }
+
+        .form-container.active {
+            display: block;
+        }
+
+        .upload-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .welcome-container {
+            text-align: center;
+            margin: 50px 0;
+        }
+
+        .welcome-container h1 {
+            font-size: 36px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .welcome-container img {
+            width: 60%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #007bff;
+        }
+
+        .form-group textarea {
+            height: 100px;
+            resize: none;
+        }
+
+        .form-group button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .form-group button:hover {
+            background-color: #0056b3;
+        }
+
+        .toggle-btn {
+            cursor: pointer;
+            font-size: 24px;
+            color: #333;
+            transition: color 0.3s ease;
+        }
+
+        .toggle-btn:hover {
+            color: #007bff;
+        }
+        .welcome-container {
+    text-align: center;
+    margin: 50px 0;
+    position: relative; /* Ensure it's positioned correctly */
+    z-index: 1; /* Make sure it’s above other elements */
+}
+
+.welcome-container h1 {
+    font-size: 36px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.welcome-container img {
+    width: 60%;
+    height: auto;
+    border-radius: 8px;
+}
+    </style>
+</head>
+<body>
+    <input type="checkbox" id="nav-toggle">
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-brand">
+            <h2><span class="lab la-laptop"></span><span>Project Builder</span></h2>
+        </div>
+        <div class="sidebar-menu">
+            <ul>
+                <li>
+                    <a href="#" id="upload-project"><span class="las la-upload"></span>
+                    <span>Upload Project</span></a>
+                </li>
+                <li>
+                    <a href="#" id="project-history"><span class="las la-history"></span>
+                    <span>Project History</span></a>
+                </li>
+                <li>
+                    <a href="#" id="investor-details"><span class="las la-users"></span>
+                    <span>Investor Details</span></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content" id="main-content">
+        <header>
+            <h2>
+                <span class="toggle-btn" id="toggle-btn">&#9776;</span>
+                Dashboard
+            </h2>
+
+            <div class="user-wrapper">
+                <img src="profile.png" width="40px" height="40px" alt="">
+                <div>
+                    <h4>Project Builder</h4>
+                </div>
+            </div>
+        </header>
+
+        <!-- Dashboard Section -->
+        <main>
+            <div id="dynamic-content">
+                <div class="welcome-container">
+                    <h1>Welcome, Builder!</h1>
+                    <img src="4207.jpg" alt="Welcome Image">
+                </div>
+
+                <!-- Existing form containers -->
+                <div class="form-container" id="upload-project-form">
+                    <h2>Upload Project</h2>
+                    <form action="uploadprojectconnection.php" method="post">
+                        <div class="form-group">
+                            <label for="FullName">Full Name:</label>
+                            <input type="text" id="FullName" name="FullName" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="Email">Email:</label>
+                            <input type="Email" id="Email" name="Email" required>
+                        </div>
+                
+                        <div class="form-group">
+                            <label for="project-name">Project Name:</label>
+                            <input type="text" id="project-name" name="project_name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="description">Description:</label>
+                            <textarea id="description" name="description" required></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="category">Category:</label>
+                            <select id="category" name="category" required>
+                                <option value="" disabled selected>Select a category</option>
+                                <option value="Technology">Technology</option>
+                                <option value="Health">Health</option>
+                                <option value="Education">Education</option>
+                                <option value="Art">Art</option>
+                                <option value="Environment">Environment</option>
+                                <option value="Social cause">Social Cause</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="status">Status:</label>
+                            <select id="status" name="status" required>
+                                <option value="" disabled selected>Select status</option>
+                                <option value="Ongoing">Ongoing</option>
+                                <option value="Completed">Completed</option>
+                                <option value="Pending">Pending</option>
+                            </select>
+                        </div>
+                
+                        <div class="form-group">
+                            <label for="date">Date:</label>
+                            <input type="date" id="date" name="date" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="funds">Funds Money (in INR):</label>
+                            <input type="number" id="funds" name="funds_money" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <button type="submit">Submit Project</button>
+                        </div>
+                    </form>
+                </div>
+                
+                <div class="form-container" id="project-history-form">
+                    <h2>Project History</h2>
+                    <p>View all your uploaded projects and their status.</p>
+                    <!-- Add content or embed an iframe to show project history if needed -->
+                </div>
+                
+                <div class="form-container" id="investor-details-form">
+                    <h2>Investor Details</h2>
+                    <p>Review information about investors who have shown interest.</p>
+                    <!-- Add content or embed an iframe to show investor details if needed -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.getElementById('toggle-btn').addEventListener('click', function() {
+            var sidebar = document.getElementById('sidebar');
+            var mainContent = document.getElementById('main-content');
+            sidebar.classList.toggle('show');
+            mainContent.classList.toggle('shift');
+        });
+
+        function showContent(id) {
+            var contents = document.querySelectorAll('.form-container');
+            contents.forEach(function(content) {
+                content.classList.remove('active');
+            });
+            document.getElementById(id).classList.add('active');
+        }
+
+        document.getElementById('upload-project').addEventListener('click', function() {
+            showContent('upload-project-form');
+        });
+
+        document.getElementById('project-history').addEventListener('click', function() {
+            showContent('project-history-form');
+        });
+
+        document.getElementById('investor-details').addEventListener('click', function() {
+            showContent('investor-details-form');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Project</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .upload-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #007bff;
+        }
+
+        .form-group textarea {
+            height: 100px;
+            resize: none;
+        }
+
+        .form-group button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .form-group button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="upload-container">
+    <h2>Upload New Project</h2>
+    <form action="uploadprojectconnection.php" method="post">
+        <div class="form-group">
+            <label for="project-name">Project Name:</label>
+            <input type="text" id="project-name" name="project_name" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" required></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label for="category">Category:</label>
+            <select id="category" name="category" required>
+                <option value="" disabled selected>Select a category</option>
+                <option value="Technology">Technology</option>
+                <option value="Health">Health</option>
+                <option value="Education">Education</option>
+                <option value="Art">Art</option>
+                <option value="Environment">Environment</option>
+                <option value="Social cause">Social Cause</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="status">Status:</label>
+            <select id="status" name="status" required>
+                <option value="" disabled selected>Select status</option>
+                <option value="Ongoing">Ongoing</option>
+                <option value="Completed">Completed</option>
+                <option value="Pending">Pending</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="funds">Funds Money (in INR):</label>
+            <input type="number" id="funds" name="funds_money" required>
+        </div>
+        
+        <div class="form-group">
+            <button type="submit">Submit Project</button>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

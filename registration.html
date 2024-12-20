@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Contact Form</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Custom Styles */
+        #professional-form {
+            padding: 60px 20px;
+            background-color: #d5b6d6;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #professional-form .content {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        #professional-form h2 {
+            font-size: 2.5em;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        #professional-form p {
+            font-size: 1.2em;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        .contactForm {
+            background-color: #ffffff;
+            border: 1px solid #e6eeb5;
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .contactForm .inputBox {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .contactForm .inputBox input,
+        .contactForm .inputBox select,
+        .contactForm .inputBox textarea {
+            width: 100%;
+            padding: 10px;
+            font-size: 1em;
+            color: #333;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fdfdfd;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .contactForm .inputBox input[type="file"] {
+            padding: 5px;
+        }
+
+        .contactForm .inputBox span,
+        .contactForm .inputBox label {
+            position: absolute;
+            left: 10px;
+            top: 10px;
+            padding: 10px;
+            font-size: 1em;
+            color: #666;
+            pointer-events: none;
+            transition: 0.5s;
+        }
+
+        .contactForm .inputBox input:focus ~ span,
+        .contactForm .inputBox select:focus ~ span,
+        .contactForm .inputBox textarea:focus ~ span,
+        .contactForm .inputBox input:valid ~ span,
+        .contactForm .inputBox select:valid ~ span,
+        .contactForm .inputBox textarea:valid ~ span {
+            top: -18px;
+            left: 10px;
+            color: #ff5733;
+            font-size: 0.8em;
+        }
+
+        .contactForm .inputBox input[type="submit"] {
+            background: #ff5733;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            padding: 10px;
+            font-size: 1em;
+        }
+
+        .contactForm .inputBox input[type="submit"]:hover {
+            background-color: #e64a19;
+        }
+
+        .terms {
+    display: flex; /* Use flexbox to align items */
+    flex-direction: column; /* Stack items vertically */
+    align-items: flex-start; /* Align items to the start of the container */
+    justify-items: left;
+}
+
+.terms a {
+    color: #007bff; /* Standard link color */
+    text-decoration: underline; /* Underline to indicate it is clickable */
+    margin-bottom: 5px; /* Add space below the link */
+}
+
+.terms input[type="checkbox"] {
+    margin-top: 10px; /* Add some space above the checkbox */
+}
+
+        #upload-sections .inputBox {
+            margin-bottom: 20px;
+        }
+
+        #upload-sections label {
+            display: block;
+            font-size: 1em;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        #upload-sections input[type="file"] {
+            display: block;
+            width: 100%;
+            padding: 50px;
+            font-size: 1em;
+            color: #333;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .upload-status {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .upload-status span {
+            display: block;
+            margin-top: 5px;
+            font-weight: bold;
+        }
+
+        .role-selection {
+            margin-bottom: 20px;
+            font-size: 1em;
+            color: #666;
+        }
+
+        .role-selection input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-check-label {
+            margin-right: 10px;
+        }
+
+        .terms {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .nav-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: flex-end; /* Align links to the right */
+    gap: 20px; /* Add space between links */
+    background-color: #333; /* Background color for visibility */
+    padding: 10px; /* Padding for spacing */
+}
+
+.nav-links li {
+    margin-left: 20px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #ffcb05;
+}
+    </style>
+</head>
+<body>
+    <header>
+        <ul class="nav-links">
+            <li><a href="Front.html">Home</a></li>
+            <li><a href="Front.html#about">About Us</a></li>
+            <li><a href="Front.html#contact">Contact</a></li>
+        </ul>
+    </header>
+<section id="professional-form" class="contactus">
+    <div class="container">
+        <div class="content">
+            <h2>Registration Form</h2>
+            <p>Please fill in the form below to submit your details.</p>
+        </div>
+        <div class="contactForm">
+            <form method="post" action="registration.php" enctype="multipart/form-data">
+                <div class="inputBox form-group">
+                    <input type="text" name="FullName" required="required">
+                    <span>Full Name</span>
+                </div>
+                <div class="inputBox form-group">
+                    <input type="text" name="PhoneNumber" required="required">
+                    <span>Phone Number</span>
+                </div>
+                <div class="inputBox form-group">
+                    <input type="email" name="Email" required="required">
+                    <span>Email</span>
+                </div>
+                <div class="inputBox form-group">
+                    <input type="text" name="Address" required="required">
+                    <span>Address</span>
+                </div>
+
+                <!-- New Password Section -->
+                <div class="inputBox form-group">
+                    <input type="password" name="Password" required="required">
+                    <span>Password</span>
+                </div>
+                <div class="inputBox form-group">
+                    <input type="password" name="ConfirmPassword" required="required">
+                    <span>Confirm Password</span>
+                </div>
+
+                <div id="upload-sections">
+                    <div class="inputBox form-group" id="aadhar-upload">
+                        <label for="aadhar-upload-input">Aadhar Card</label>
+                        <input type="file" id="aadhar-upload-input" name="AadharUpload" accept="image/*" required>
+                        <div id="aadhar-status" class="upload-status"></div>
+                    </div>
+                    <div class="inputBox form-group" id="pan-upload">
+                        <label for="pan-upload-input">Pan Card</label>
+                        <input type="file" id="pan-upload-input" name="PanUpload" accept="image/*" required>
+                        <div id="pan-status" class="upload-status"></div>
+                    </div>
+                    <div class="inputBox form-group" id="domicile-upload">
+                        <label for="domicile-upload-input">Domicile</label>
+                        <input type="file" id="domicile-upload-input" name="DomicileUpload" accept="image/*" required>
+                        <div id="domicile-status" class="upload-status"></div>
+                    </div>
+                </div>
+
+                <div class="role-selection form-group">
+                    <label><b>Select Your Role:</b></label>
+                    <div class="form-check">
+                        <input type="radio" id="project-builder" name="Role" value="Project Builder" class="form-check-input" required>
+                        <label for="project-builder" class="form-check-label">Project Builder</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="radio" id="investor" name="Role" value="Investor" class="form-check-input" required>
+                        <label for="investor" class="form-check-label">Investor</label>
+                    </div>
+                </div>
+                <div class="inputBox terms form-group">
+                    <label for="terms-checkbox" style="display: block; text-align: left;" >
+                    </label>
+                    I have read and agree to the <a href="termscond.html" style="color: #007bff; text-decoration: underline;">Terms and Conditions</a>
+                    <input type="checkbox" name="Terms" id="terms-checkbox" required="required" style="margin-top: 10px;">
+                </div>
+                
+                <br>
+                
+                <div class="inputBox form-group">
+                    <input type="submit" value="Submit">
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+</body>
+</html>

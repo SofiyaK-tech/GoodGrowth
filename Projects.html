@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoodGrowth - Crowdfunding Platform</title>
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: #e3d9c1;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: #699de0;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .logo {
+            flex: 1; /* Takes up remaining space */
+        }
+
+        .logo h1 {
+            margin: 0;
+            font-size: 1.5em;
+        }
+
+        .nav-links {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            margin-left: 1200px; /* Aligns nav links to the right */
+        }
+
+        .nav-links li {
+            margin-left: 20px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #ffcb05;
+        }
+
+        .main-content {
+            padding: 100px 20px 60px; /* Increased top padding to account for fixed header */
+        }
+
+        .search-container {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .search-container input {
+            padding: 10px;
+            width: 300px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .projects {
+            text-align: center;
+        }
+
+        .projects h2 {
+            font-size: 2em;
+            margin-bottom: 40px;
+        }
+
+        .project-cards {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px; /* Gap between cards */
+        }
+
+        .project-card {
+            background-color: #f9f9f9;
+            width: 300px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .project-card img {
+            width: 100%;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .project-info {
+            padding: 20px;
+        }
+
+        .project-name {
+            font-size: 1.5em;
+            margin: 10px 0;
+        }
+
+        .project-genre {
+            font-size: 1.1em;
+            color: #555;
+            margin: 5px 0;
+        }
+
+        .project-description {
+            font-size: 1em;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .invest-button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 15px;
+            text-align: center;
+            border-radius: 5px;
+            text-decoration: none;
+            display: block;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .invest-button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <ul class="nav-links">
+            <li><a href="Front.html">Home</a></li>
+            <li><a href="Front.html#about">About Us</a></li>
+            <li><a href="Front.html#contact">Contact</a></li>
+        </ul>
+    </header>
+
+    <div class="main-content">
+        <div class="search-container">
+            <input type="text" id="search" placeholder="Search by category..." onkeyup="filterProjects()">
+        </div>
+        <section id="projects" class="projects">
+            <h2>PROJECTS</h2>
+            <div class="project-cards" id="projectCards">
+                <!-- Example project card -->
+                <div class="project-card" data-genre="Social">
+                    <img src="ci.jpg" alt="Project 1">
+                    <br>
+                    <div class="project-info">
+                        <div class="project-name">THE AKANKSHA FOUNDATION</div>
+                        <div class="project-genre">Social</div>
+                        <div class="project-description">
+                            Project Alpha focuses on advancing technology for sustainable development. It aims to develop cutting-edge solutions for energy efficiency and clean technology.
+                        </div>
+                        <a href="https://projectchirag.org/" class="invest-button">Invest Now</a>
+                    </div>
+                </div>
+                <!-- More project cards can be added similarly -->
+                <div class="project-card" data-genre="Education">
+                    <img src="edu.jpg" alt="Project 2">
+                    <div class="project-info">
+                        <div class="project-name">Project Beta</div>
+                        <div class="project-genre">Education</div>
+                        <div class="project-description">
+                            Project Beta is dedicated to improving educational resources and opportunities in underserved communities. It focuses on providing quality education and training for youth.
+                        </div>
+                        <a href="https://www.hccnepal.org/?gad_source=1&gclid=Cj0KCQjwgL-3BhDnARIsAL6KZ69M_ziLD80_TDZ5HJb4UyonSDrPCG8_T7A75FtXPqW_s8TIRROM7OcaAmfrEALw_wcB" class="invest-button">Invest Now</a>
+                    </div>
+                </div>
+                <div class="project-card" data-genre="Health">
+                    <img src="health.png" alt="Project 3">
+                    <div class="project-info">
+                        <div class="project-name">Project Gamma</div>
+                        <div class="project-genre">Health</div>
+                        <div class="project-description">
+                            Project Gamma aims to enhance healthcare services through innovative solutions. It targets improving health outcomes and access to medical care in remote areas.
+                        </div>
+                        <br>
+                        <a href="https://projectcure.org/" class="invest-button">Invest Now</a>
+                    </div>
+                </div>
+                <div class="project-card" data-genre="Education">
+                    <img src="water.jpg" alt="Project 4">
+                    <div class="project-info">
+                        <div class="project-name">Water management</div>
+                        <div class="project-genre">Social Cause</div>
+                        <div class="project-description">
+                            The Water Management Project aims to optimize the use and distribution of water resources through advanced monitoring and technology. By implementing sustainable practices, the project seeks to reduce wastage and enhance efficiency in water usage for agricultural, industrial, and domestic purposes. 
+                        </div>
+                        <a href="https://thewaterproject.org/" class="invest-button">Invest Now</a>
+                    </div>
+                </div>
+                <!-- More project cards can be added similarly -->
+            </div>
+        </section>
+    </div>
+
+    <script>
+        function filterProjects() {
+            const searchInput = document.getElementById('search').value.toLowerCase();
+            const projectCards = document.querySelectorAll('.project-card');
+
+            projectCards.forEach(card => {
+                const genre = card.getAttribute('data-genre').toLowerCase();
+                if (genre.includes(searchInput)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

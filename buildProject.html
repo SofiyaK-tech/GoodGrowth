@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Contact Form</title>
+    <style>
+        /* Professional Form Section */
+        #professional-form {
+            padding: 60px 20px;
+            background-color: #fafafa;
+        }
+
+        #professional-form .content {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        #professional-form h2 {
+            font-size: 2em;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        #professional-form p {
+            font-size: 1.1em;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        #professional-form .container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap; /* Allow wrapping of content */
+        }
+
+        .contactForm {
+            flex-basis: 100%;
+            max-width: 800px; /* Set a max width for large screens */
+            margin: 0 auto;
+        }
+
+        .contactForm .inputBox {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .contactForm .inputBox input,
+        .contactForm .inputBox select,
+        .contactForm .inputBox textarea {
+            width: 100%;
+            padding: 10px;
+            font-size: 1em;
+            color: #333;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+            background: none;
+        }
+
+        .contactForm .inputBox input[type="file"] {
+            padding: 5px;
+        }
+
+        .contactForm .inputBox span,
+        .contactForm .inputBox label {
+            position: absolute;
+            left: 10px;
+            top: 10px;
+            padding: 10px;
+            font-size: 1em;
+            color: #666;
+            pointer-events: none;
+            transition: 0.5s;
+        }
+
+        .contactForm .inputBox input:focus ~ span,
+        .contactForm .inputBox select:focus ~ span,
+        .contactForm .inputBox textarea:focus ~ span,
+        .contactForm .inputBox input:valid ~ span,
+        .contactForm .inputBox select:valid ~ span,
+        .contactForm .inputBox textarea:valid ~ span {
+            top: -18px;
+            left: 10px;
+            color: #ff5733;
+            font-size: 0.8em;
+        }
+
+        .contactForm .inputBox input[type="submit"] {
+            background: #ff5733;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            padding: 10px;
+            font-size: 1em;
+        }
+
+        .contactForm .inputBox input[type="submit"]:hover {
+            background-color: #e64a19;
+        }
+
+        .contactForm .terms {
+            display: flex;
+            align-items: center;
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 20px;
+        }
+
+        .contactForm .terms label {
+            margin-right: 10px;
+            color: #666;
+        }
+
+        .contactForm .terms input[type="checkbox"] {
+            margin-left: 10px;
+        }
+
+        #upload-sections .inputBox {
+            margin-bottom: 20px; /* Add spacing between sections */
+        }
+
+        #upload-sections label {
+            display: block; /* Ensure label is on its own line */
+            font-size: 1em;
+            color: #666;
+            margin-bottom: 10px; /* Add spacing between label and input */
+        }
+
+        #upload-sections input[type="file"] {
+            display: block; /* Ensure file input is on its own line */
+            width: 100%;
+            padding: 5px;
+            font-size: 1em;
+            color: #333;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background: none;
+            box-sizing: border-box; /* Ensure padding and border are included in width */
+        }
+
+        .upload-status {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .upload-status span {
+            display: block;
+            margin-top: 5px;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .contactForm {
+                flex-basis: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<section id="professional-form" class="contactus">
+    <div class="content">
+        <h2>Professional Contact Form</h2>
+        <p>Please fill in the form below to submit your details.</p>
+    </div>
+    <div class="container">
+        <div class="contactForm">
+            <form method="post" action="submitform.php" enctype="multipart/form-data">
+                <div class="inputBox">
+                    <input type="text" name="FullName" required="required">
+                    <span>Full Name</span>
+                </div>
+                <div class="inputBox">
+                    <input type="text" name="PhoneNumber" required="required">
+                    <span>Phone Number</span>
+                </div>
+                <div class="inputBox">
+                    <input type="email" name="Email" required="required">
+                    <span>Email</span>
+                </div>
+                <div class="inputBox">
+                    <input type="text" name="Address" required="required">
+                    <span>Address</span>
+                </div>
+
+                <div id="upload-sections">
+                    <div class="inputBox" id="aadhar-upload">
+                        <label for="aadhar-upload-input"></label>
+                        <input type="file" id="aadhar-upload-input" name="AadharUpload" accept="image/*" required>
+                        <div id="aadhar-status" class="upload-status"></div>
+                    </div>
+                    <div class="inputBox" id="pan-upload">
+                        <label for="pan-upload-input"></label>
+                        <input type="file" id="pan-upload-input" name="PanUpload" accept="image/*" required>
+                        <div id="pan-status" class="upload-status"></div>
+                    </div>
+                    <div class="inputBox" id="domicile-upload">
+                        <label for="domicile-upload-input"></label>
+                        <input type="file" id="domicile-upload-input" name="DomicileUpload" accept="image/*" required>
+                        <div id="domicile-status" class="upload-status"></div>
+                    </div>
+                </div>
+
+                <div class="inputBox terms">
+                    <label for="terms-checkbox">I have read and agree to the <a href="terms-and-conditions.html">Terms and Conditions</a><input type="checkbox" name="Terms" id="terms-checkbox" required="required"></label>
+                    <input type="checkbox" name="Terms" id="terms-checkbox" required="required">
+                </div>
+
+                <div class="inputBox">
+                    <input type="submit" value="Submit">
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<script>
+    // Optional: Update upload status on file selection
+    document.querySelectorAll('#upload-sections input[type="file"]').forEach(input => {
+        input.addEventListener('change', function() {
+            const statusElement = this.nextElementSibling;
+            if (this.files.length > 0) {
+                statusElement.innerHTML = 'Uploaded successfully!';
+            } else {
+                statusElement.innerHTML = '';
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

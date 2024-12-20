@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoodGrowth - Crowdfunding Platform</title>
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Styles */
+        body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    background-color: #f9f9f9;
+    line-height: 1.6;
+}
+
+header {
+    background-color: #699de0;
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.logo h1 {
+    margin: 0;
+    font-size: 1.5em;
+}
+
+.nav-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    margin-right: 60px;
+}
+
+.nav-links li {
+    margin-left: 20px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #ffcb05;
+}
+
+.start-campaign-btn {
+    background-color: #ff5733;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+
+.start-campaign-btn:hover {
+    background-color: #e64a19;
+}
+
+/* Account Section with Dropdown */
+.account {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+}
+
+.account-logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.account-logo img {
+    width: 100%;
+    border-radius: 50%;
+}
+
+.account-logo:hover {
+    background-color: #f1f1f1;
+}
+
+/* Dropdown visibility change */
+.account:hover .dropdown {
+    display: block;
+    opacity: 1;
+}
+
+/* Dropdown container */
+.dropdown {
+    display: none; /* Hidden by default */
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background-color: white;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    border-radius: 5px;
+    overflow: hidden;
+    opacity: 0; /* Hidden initially */
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* Dropdown items */
+.dropdown a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    white-space: nowrap;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.dropdown a:hover {
+    background-color: #f1f1f1;
+}
+
+.home {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: rgb(26, 25, 25);
+    overflow: hidden;
+}
+
+#home-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+.home-content {
+    position: relative;
+    z-index: 1;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: larger;
+}
+
+.cta-button {
+    background-color: #ff5733;
+    padding: 12px 24px;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    display: inline-block;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+
+.cta-button:hover {
+    background-color: #e64a19;
+}
+
+.campaigns {
+    padding: 60px 20px;
+    background-color: rgb(232, 209, 209);
+    text-align: center;
+}
+
+.campaigns h2 {
+    font-size: 2em;
+    margin-bottom: 40px;
+}
+
+.campaign-cards {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.campaign-card {
+    background-color: #f9f9f9;
+    width: 300px;
+    margin: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.campaign-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.campaign-card img {
+    width: 100%;
+    border-radius: 10px 10px 0 0;
+}
+
+.campaign-info {
+    padding: 20px;
+}
+
+.donate-button {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 15px;
+    text-align: center;
+    border-radius: 5px;
+    text-decoration: none;
+    display: block;
+    margin-top: 15px;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+
+.donate-button:hover {
+    background-color: #218838;
+}
+
+.about {
+    background-color: #f2f7df;
+    padding: 60px 30px;
+    border-radius: 15px;
+    max-width: 1100px;
+    margin: 0 auto;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease-in-out;
+}
+
+.about:hover {
+    transform: translateY(-10px);
+}
+
+.about h2 {
+    font-size: 2.8em;
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 25px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.about h3 {
+    font-size: 2em;
+    color: #34495e;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    font-weight: 600;
+    border-bottom: 3px solid #2980b9;
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+.about p {
+    font-size: 1.25em;
+    color: #7f8c8d;
+    line-height: 1.8;
+    margin-bottom: 25px;
+    text-align: justify;
+    text-indent: 50px;
+}
+
+.about ul {
+    margin-left: 30px;
+    list-style-type: square;
+    font-size: 1.25em;
+    color: #7f8c8d;
+}
+
+.about ul li {
+    margin-bottom: 15px;
+    padding-left: 5px;
+}
+.about strong {
+    color: #2c3e50; /* Darker color for emphasized text */
+    font-weight: 700; /* Bold font weight for emphasis */
+}
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+}
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        margin-top: 10px;
+    }
+
+    .nav-links li {
+        margin-left: 0;
+        margin-bottom: 10px;
+    }
+
+    .campaign-cards {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .campaign-card {
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .account {
+        position: relative;
+        top: 10px;
+        right: 0;
+    }
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 400px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.close {
+    color: #aaa;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+}
+
+.modal-content h2 {
+    margin-top: 0;
+}
+
+.modal-button {
+    background-color: #1a73e8;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.modal-button:hover {
+    background-color: #1558b0;
+}
+
+.contact-us {
+            padding: 60px 20px;
+            background-color: #e8f0fe;
+            text-align: center;
+        }
+
+        /* Container and Box Shadows */
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: flex-start;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .contact-details,
+        .contact-form {
+            width: 45%;
+            margin: 20px 0;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .contact-details:hover,
+        .contact-form:hover {
+            transform: translateY(-10px);
+            box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Text Colors */
+        .contact-details h3,
+        .contact-form h3 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            color: #1a73e8;
+        }
+
+        .contact-details p {
+            font-size: 1.1em;
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        .contact-details ul {
+            list-style: none;
+            padding: 0;
+            font-size: 1.1em;
+            color: #555;
+        }
+
+        .contact-details ul li {
+            margin-bottom: 10px;
+        }
+
+        /* Form Styling */
+        .contact-form .form-group {
+            margin-bottom: 15px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+            transition: border-color 0.3s ease, background-color 0.3s ease;
+        }
+
+        .contact-form input:hover,
+        .contact-form textarea:hover {
+            border-color: #1a73e8;
+            background-color: rgba(26, 115, 232, 0.05);
+        }
+
+        /* Button Styling */
+        .contact-button {
+            background-color: #1a73e8;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .contact-button:hover {
+            background-color: #1558b0;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <h1>GoodGrowth</h1>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="Projects.html">Projects</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="login.html" class="start-campaign-btn" >LOGIN</a></li>
+        </ul>
+        <div class="account">
+            <div class="account-logo" id="account-logo">
+                <img src="pngtree-avatar-icon-profile-icon-member-login-vector-isolated-png-image_1978396.jpg" alt="Account">
+            </div>
+            <div class="dropdown" id="account-dropdown">
+                <a href="projectbuilderlogin.html" class="dropdown-item" data-role="Project Builder">Project Creator</a>
+                <a href="investorlogin.html" class="dropdown-item" data-role="Investor">Investor</a>
+            </div>
+        </div>
+    </header>
+    
+    <section id="home" class="home">
+        <video autoplay muted loop id="home-video">
+            <source src="ABC.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="home-content">
+            <h1>Make a Difference with GoodGrowth</h1>
+            <p>Support causes you care about or start your own campaign to bring change.</p>
+            <a href="Projects.html" class="cta-button">Explore Projects</a>
+        </div>
+    </section>
+    
+    <div class="account">
+        <div class="account-logo">
+            <img src="pngtree-avatar-icon-profile-icon-member-login-vector-isolated-png-image_1978396.jpg" alt="Account">
+        </div>
+        <div class="dropdown">
+            <a href="projectbuilderregistration.html" class="dropdown-item">Project Creator</a>
+            <a href="investorregistration.html" class="dropdown-item">Investor</a>
+        </div>
+    </div>
+    <section id="campaigns" class="campaigns">
+        <h2>Featured Projects</h2>
+        <div class="campaign-cards">
+            <!-- Example campaign card -->
+            <div class="campaign-card">
+                <img src="ci.jpg" alt="Campaign 1">
+                <div class="campaign-info">
+                    <h3>Co-Impact</h3>
+                    <p>Co-Impact is a global philanthropic collaborative that sources and supports locally rooted coalitions in the Global South to transform underlying systems and achieve impact at scale, with a core focus on advancing gender equality and women’s leadership. The organization brings together institutional and individual donors to provide large, flexible grants and technical assistance in the areas of health, education, and economic opportunity.</p>
+                    <a href="https://co-impact.org/" class="donate-button">Invest Now</a>
+                </div>
+            </div>
+            <!-- More campaign cards can be added similarly -->
+            <!-- Example campaign card -->
+            <div class="campaign-card">
+                <img src="cjrf.jpg" alt="Campaign 2">
+                <div class="campaign-info">
+                    <h3>Climate Justice Resilience Fund</h3>
+                    <p>The Climate Justice Resilience Fund works to empower women, youth, and indigenous peoples on the front lines of climate change to create and share their own solutions for resilience. With a focus on East Africa, the Bay of Bengal, and the Arctic, the organization funds advocacy, coalition building, and outreach initiatives to ensure that community voices shape policy solutions, particularly in the areas of water access, food security and sovereignty, sustainable livelihoods, and climate-related migration and relocation.</p>
+                   <br>
+                    <a href="https://www.cjrfund.org/" class="donate-button">Invest Now</a>
+                </div>
+            </div>
+            <!-- More campaign cards can be added similarly -->
+            <!-- Example campaign card -->
+            <div class="campaign-card">
+                <img src="yfi.png" alt="Campaign 3">
+                <div class="campaign-info">
+                    <h3>Youth First Initiative</h3>
+                    <p>The Youth First Initiative seeks to accelerate reforms to end the use of incarceration of youth in the justice system. Through advocacy efforts and partnerships with various state groups, Youth First seeks to close youth prisons and invest in community-based alternatives. Youth First is increasing awareness about the negative impacts of youth incarceration; creating a national dialogue on alternatives to incarceration; working directly with youth, families, and allies on the local and national level to gather support for change; and supporting state initiatives with technical assistance.</p>
+                    <a href="https://www.nokidsinprison.org/" class="donate-button">Invest Now</a>
+                </div>
+            </div>
+            <!-- More campaign cards can be added similarly -->
+        </div>
+    </section>
+    <div id="login-popup" class="modal">
+        <div class="modal-content">
+            <span class="close" id="login-modal-close">&times;</span>
+            <h2>Login Options</h2>
+            <p>Please select how you'd like to log in:</p>
+            <button class="modal-button" id="login-project-builder">Login as Project Builder</button>
+            <button class="modal-button" id="login-investor">Login as Investor</button>
+            <button class="modal-button" id="admin">Login as ADMIN</button>
+        </div>
+    </div>
+    <section class="contact-us" id="contact">
+        <h1>Help Center</h1>
+        <div class="contact-container">
+            <div class="contact-details">
+                <h3>Get in Touch</h3>
+                <p>If you have any questions, feel free to reach out to us. We're here to help!</p>
+                <br>
+                <ul>
+                    <li><strong>Email:</strong> dixitabhayraj2603</li>
+                    <li><strong>Phone:</strong> +91 7999275579</li>
+                    <li><strong>Address:</strong> CH-97, Deen Dayal Nagar</li>
+                </ul>
+                <br>
+            </div>
+            <div class="contact-form">
+                <h3>Send Us a Message</h3>
+                <form action="contact.php" method="post">
+                    <div class="form-group">
+                        <input type="text" name="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="category">Select Category:</label>
+                        <select name="category" id="category" required>
+                            <option value="guestuser">Guest User</option>
+                            <option value="projectbuilder">Project Builder</option>
+                            <option value="investor">Investor</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="contact-button">Send Message</button>
+                </form>
+                
+            </div>
+        </div>
+    </section>
+    <section id="about" class="about">
+        <h2>About GoodGrowth</h2>
+        <p>GoodGrowth is a crowdfunding platform dedicated to helping individuals and organizations raise funds for personal causes, health expenses, education, and more. We empower you to create the change you want to see in the world.</p>
+        
+        <br>
+        
+        <h3>Our Mission</h3>
+        <p>At GoodGrowth, we believe that everyone has the power to bring about meaningful change. Whether you're an entrepreneur with a groundbreaking idea, an individual in need of urgent medical assistance, or a student striving to achieve academic dreams, our platform is here to help you raise the funds you need. We connect passionate creators with compassionate supporters, fostering a space where great ideas can flourish and lives can be transformed.</p>
+        
+        <br>
+        
+        <h3>What We Offer</h3>
+        <ul>
+            <li><strong>For Project Creators:</strong> We provide an intuitive platform to share your story, set your goals, and reach a global audience. Our tools make it easy to track progress, engage with backers, and turn your vision into reality.</li>
+            <li><strong>For Investors:</strong> Explore a diverse range of projects and causes that resonate with your values. Whether you're looking to support innovative startups, community initiatives, or charitable causes, GoodGrowth gives you the opportunity to make a real difference.</li>
+        </ul>
+        
+        <br>
+        
+        <h3>Why GoodGrowth?</h3>
+        <p>We stand out for our commitment to transparency, trust, and success. Our dedicated support team is here to guide you through every step of your crowdfunding journey. With a focus on integrity and a passion for change, we ensure that every project on our platform has the best chance to succeed.</p>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 GoodGrowth. All rights reserved.</p>
+    </footer>
+
+
+<script>
+     const accountLogo = document.getElementById('account-logo');
+    const dropdown = document.getElementById('account-dropdown');
+
+    accountLogo.addEventListener('click', function () {
+        dropdown.style.display = (dropdown.style.display === 'block') ? 'none' : 'block';
+    });
+
+    // To close the dropdown when clicking outside
+    document.addEventListener('click', function(event) {
+        if (!accountLogo.contains(event.target) && !dropdown.contains(event.target)) {
+            dropdown.style.display = 'none';
+        }
+    });
+// Login Popup Modal Elements
+const loginModal = document.getElementById('login-popup');
+        const loginModalClose = document.getElementById('login-modal-close');
+        const loginButton = document.querySelector('.start-campaign-btn');
+        const projectBuilderLogin = document.getElementById('login-project-builder');
+        const investorLogin = document.getElementById('login-investor');
+        const admin = document.getElementById('admin');
+
+        // Show login modal when login button is clicked
+        loginButton.addEventListener('click', function (event) {
+            event.preventDefault();
+            loginModal.style.display = 'block';
+        });
+
+        // Close login modal when close button is clicked
+        loginModalClose.addEventListener('click', function () {
+            loginModal.style.display = 'none';
+        });
+
+        // Close login modal when clicking outside of it
+        window.addEventListener('click', function (event) {
+            if (event.target == loginModal) {
+                loginModal.style.display = 'none';
+            }
+        });
+
+        // Handle login option click
+        projectBuilderLogin.addEventListener('click', function () {
+            loginModal.style.display = 'none';
+            // Redirect to project builder login page (Update the URL as needed)
+            window.location.href = 'projectbuilderlogin.html';
+        });
+
+        investorLogin.addEventListener('click', function () {
+            loginModal.style.display = 'none';
+            // Redirect to investor login page (Update the URL as needed)
+            window.location.href = 'investorlogin.html';
+        });
+        admin.addEventListener('click', function () {
+            loginModal.style.display = 'none';
+            // Redirect to investor login page (Update the URL as needed)
+            window.location.href = 'adminlogin.html';
+        });
+    
+</script>
+</body>
+
+</html>
